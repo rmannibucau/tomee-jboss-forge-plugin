@@ -7,10 +7,12 @@ import org.jboss.forge.project.facets.events.RemoveFacets;
 import org.jboss.forge.shell.Shell;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.Command;
+import org.jboss.forge.shell.plugins.Help;
 import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.SetupCommand;
 
 @Alias("tomee")
+@Help("A plugin helping with the tomee-maven-plugin usage")
 public class TomEEPlugin implements Plugin {
     @Inject
     private Shell shell;
@@ -34,6 +36,11 @@ public class TomEEPlugin implements Plugin {
     @Command("run")
     public void run() throws Exception {
         command("run");
+    }
+
+    @Command("debug")
+    public void debug() throws Exception {
+        command("debug");
     }
 
     @Command("start")
