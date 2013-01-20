@@ -51,15 +51,6 @@ public class TomEEFacet extends BaseFacet {
         return true;
     }
 
-    private static boolean isMoreThan(final Dependency version, final int major, final int minor,final int patch) {
-        final Pattern pat = Pattern.compile("([0-9]*).([0-9]*).([0-9]*)(\\-SNAPSHOT)*");
-        final Matcher matcher = pat.matcher(version.getVersion());
-        return  matcher.matches()
-                && (Integer.parseInt(matcher.group(1)) > major
-                || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) > minor)
-                || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) == minor && Integer.parseInt(matcher.group(3)) > patch));
-    }
-
     @Override
     public boolean isInstalled() {
         return project.getFacet(MavenPluginFacet.class).hasPlugin(dependency());
@@ -73,5 +64,14 @@ public class TomEEFacet extends BaseFacet {
 
     private static DependencyBuilder dependency() {
         return DependencyBuilder.create().setGroupId(GID).setArtifactId(AID);
+    }
+
+    private static boolean isMoreThan(final Dependency version, final int major, final int minor,final int patch) {
+        final Pattern pat = Pattern.compile("([0-9]*).([0-9]*).([0-9]*)(\\-SNAPSHOT)*");
+        final Matcher matcher = pat.matcher(version.getVersion());
+        return  matcher.matches()
+                && (Integer.parseInt(matcher.group(1)) > major
+                || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) > minor)
+                || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) == minor && Integer.parseInt(matcher.group(3)) > patch));
     }
 }
