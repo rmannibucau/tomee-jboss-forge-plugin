@@ -1,4 +1,4 @@
-package org.apache.openejb.forge.plugins;
+package org.jboss.forge.tomee;
 
 import org.jboss.forge.maven.MavenPluginFacet;
 import org.jboss.forge.maven.plugins.Configuration;
@@ -78,10 +78,10 @@ public class TomEEFacet extends BaseFacet {
         return DependencyBuilder.create().setGroupId(GID).setArtifactId(AID);
     }
 
-    private static boolean isMoreThan(final Dependency version, final int major, final int minor,final int patch) {
+    private static boolean isMoreThan(final Dependency version, final int major, final int minor, final int patch) {
         final Pattern pat = Pattern.compile("([0-9]*).([0-9]*).([0-9]*)(\\-SNAPSHOT)*");
         final Matcher matcher = pat.matcher(version.getVersion());
-        return  matcher.matches()
+        return matcher.matches()
                 && (Integer.parseInt(matcher.group(1)) > major
                 || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) > minor)
                 || (Integer.parseInt(matcher.group(1)) == major && Integer.parseInt(matcher.group(2)) == minor && Integer.parseInt(matcher.group(3)) > patch));
